@@ -23,7 +23,7 @@ class MusicPlayerScreen extends StatefulWidget {
   const MusicPlayerScreen({super.key});
 
   @override
-  _MusicPlayerScreenState createState() => _MusicPlayerScreenState();
+  State<MusicPlayerScreen> createState() => _MusicPlayerScreenState();
 }
 
 class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
@@ -38,9 +38,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   }
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.audio
-    );
+    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.audio);
 
     if (result != null) {
       setState(() {
@@ -49,21 +47,17 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
     }
   }
 
-  Future<void> _playPauseAudio() async {
+  void _playPauseAudio() {
     if (_isPlaying) {
       _audioPlayer.pause();
     } else {
-      if (_audioFilePath.isEmpty) {
-        await _pickFile();
-      }
-
       if (_audioFilePath.isNotEmpty) {
         _audioPlayer.play(DeviceFileSource(_audioFilePath));
-        setState(() {
-          _isPlaying = !_isPlaying;
-        });
-      }  
+      }
     }
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
   }
 
   @override
