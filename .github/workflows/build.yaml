@@ -27,9 +27,12 @@ jobs:
       - name: Create App (iOS)
         run: |
           zip -r com.juiceFruitcx.app.ipa build/ios/iphoneos/Runner.app
+          echo "$GITHUB_WORKSPACE"
+          ls -la /
+          find . -name "*.ipa"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@main
         with:
           name: com.juiceFruitcx.app.ipa
-          path: $GITHUB_WORKSPACE/*.ipa
+          path: ./*.ipa
