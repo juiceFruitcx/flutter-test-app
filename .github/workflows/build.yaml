@@ -10,10 +10,10 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
 
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@main
         with:
           flutter-version: 'latest'
 
@@ -34,7 +34,7 @@ jobs:
           CI: true
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: com.juiceFruitcx.app.ipa
           path: $GITHUB_WORKSPACE/build/Runner/*.ipa
