@@ -45,6 +45,14 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
+	<key>UIDocumentPickerExtensionTypes</key>
+	<array>
+  		<string>public.audio</string>
+  		<string>public.movie</string>
+  		<string>public.content</string>
+	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library for selecting files.</string>
 	<key>NSMicrophoneUsageDescription</key>
