@@ -53,10 +53,6 @@
   		<string>public.movie</string>
   		<string>public.content</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library for selecting files.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone for playing audio.</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>We need access to your music library for playing songs.</string>
 	<key>NSDocumentsFolderUsageDescription</key>
