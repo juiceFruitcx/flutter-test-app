@@ -2,43 +2,39 @@ name: Build
 
 on:
   push:
-    branches:
-      - main  # или другая ветка, которую ты используешь
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: macos-latest  # Используем macOS для сборки iOS приложения
+    runs-on: macos-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: 'latest'  # Можно указать конкретную версию Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'latest'
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Build (iOS)
-      run: |
-        flutter build ios --release --no-codesign
+      - name: Build (iOS)
+        run: |
+          flutter build ios --release --no-codesign
 
-    - name: Create App (iOS)
-      run: |
-        cd ios
-        xcodebuild -workspace Runner.xcworkspace -scheme Runner archive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive
-        xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive -exportPath $GITHUB_WORKSPACE/build/Runner -exportOptionsPlist $GITHUB_WORKSPACE/ios/entitlements.plist
-        ls $GITHUB_WORKSPACE/build/Runner/
-      env:
-        CI: true
+      - name: Create App (iOS)
+        run: |
+          cd ios
+          xcodebuild -workspace Runner.xcworkspace -scheme Runner archive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive
+          xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive -exportPath $GITHUB_WORKSPACE/build/Runner -exportOptionsPlist $GITHUB_WORKSPACE/ios/entitlements.plist
+          ls $GITHUB_WORKSPACE/build/Runner/
+        env:
+          CI: true
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: runner-ipa
-        path: $GITHUB_WORKSPACE/build/Runner/*.ipa
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: com.juiceFruitcx.app.ipa
+          path: $GITHUB_WORKSPACE/build/Runner/*.ipa
