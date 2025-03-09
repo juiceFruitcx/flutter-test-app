@@ -49,17 +49,21 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
     }
   }
 
-  void _playPauseAudio() {
+  Future<void> _playPauseAudio() async {
     if (_isPlaying) {
       _audioPlayer.pause();
     } else {
+      if (_audioFilePath.isEmpty) {
+        await _pickFile();
+      }
+
       if (_audioFilePath.isNotEmpty) {
         _audioPlayer.play(DeviceFileSource(_audioFilePath));
-      }
+        setState(() {
+          _isPlaying = !_isPlaying;
+        });
+      }  
     }
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
   }
 
   @override
@@ -81,7 +85,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
             _audioFilePath.isEmpty
                 ? Text('No file selected')
                 : Text(
-                    'Selected File: ${_audioFilePath.split('/').last}',  // Отображение имени файла
+                    'Selected File: ${_audioFilePath.split('/').last}',
                     style: TextStyle(fontSize: 16),
                   ),
             SizedBox(height: 20),
