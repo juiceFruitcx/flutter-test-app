@@ -26,14 +26,12 @@ jobs:
 
       - name: Create App (iOS)
         run: |
-          mkdir -p Payload
-          cp -r build/ios/iphoneos/Runner.app Payload/
-          zip -r Runner.ipa Payload
-        env:
-          CI: true
+          mkdir -p App
+          cp -r build/ios/iphoneos/Runner.app App/
+          zip -r com.juiceFruitcx.app.ipa App
 
       - name: Upload artifacts
         uses: actions/upload-artifact@main
         with:
           name: com.juiceFruitcx.app.ipa
-          path: $GITHUB_WORKSPACE/build/Runner/*.ipa
+          path: $GITHUB_WORKSPACE/App/*.ipa
