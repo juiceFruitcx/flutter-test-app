@@ -26,10 +26,9 @@ jobs:
 
       - name: Create App (iOS)
         run: |
-          cd ios
-          xcodebuild -workspace Runner.xcworkspace -scheme Runner archive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive
-          xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/build/Runner.xcarchive -exportPath $GITHUB_WORKSPACE/build/Runner -exportOptionsPlist $GITHUB_WORKSPACE/ios/entitlements.plist
-          ls $GITHUB_WORKSPACE/build/Runner/
+          mkdir -p Payload
+          cp -r build/ios/iphoneos/Runner.app Payload/
+          zip -r Runner.ipa Payload
         env:
           CI: true
 
