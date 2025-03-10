@@ -41,7 +41,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: [
-        'mps3',
+        'mp3',
         'wav',
         'ogg',
         'flac',
