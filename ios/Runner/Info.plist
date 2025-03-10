@@ -53,12 +53,15 @@
   		<string>public.movie</string>
   		<string>public.content</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone for background audio play.</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>We need access to your music library for playing songs.</string>
 	<key>NSDocumentsFolderUsageDescription</key>
 	<string>We need access to your files to pick audio files.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
    		<string>fetch</string>
    		<string>remote-notification</string>
 	</array>
