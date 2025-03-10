@@ -1,16 +1,28 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:audio_session/audio_session.dart';
 
 class AudioPlayerHandler extends BaseAudioHandler {
   final AudioPlayer _audioPlayer = AudioPlayer();
-  final List<String> _playlist = []; // Список треков
+  List<String> _playlist = []; // Список треков
   String? _currentTrack;
+
+  void _configureAudioSession() async {
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration.music());
+  }
 
   AudioPlayerHandler() {
     _audioPlayer.playerStateStream.listen((state) {
-      // Обновляем уведомление при изменении состояния плеера
+       _configureAudioSession();
       _updateMediaSession();
     });
+  }
+
+  void setPlaylist(List<String> playlist) {
+    if (playlist.isNotEmpty) {
+      _playlist = playlist;
+    }
   }
 
   /// Воспроизведение текущего трека

@@ -34,13 +34,14 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: MusicPlayerScreen(),
+      home: MusicPlayerScreen(audioHandler: audioHandler,),
     );
   }
 }
 
 class MusicPlayerScreen extends StatefulWidget {
-  const MusicPlayerScreen({super.key});
+  final AudioPlayerHandler audioHandler;
+  const MusicPlayerScreen({required this.audioHandler, super.key});
 
   @override
   State<MusicPlayerScreen> createState() => _MusicPlayerScreenState();
@@ -115,6 +116,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               .toList(),
         );
         _playlist.addAll(result.paths.whereType<String>());
+        widget.audioHandler.setPlaylist(_playlist);
         if (_currentTrack == null && _playlist.isNotEmpty) {
           _currentTrack = _playlist.first;
         }
