@@ -18,7 +18,12 @@ jobs:
           flutter-version: '3.29.1'
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          cd ios
+          rm -rf Pods Podfile.lock
+          pod repo update
+          pod install --verbose
 
       - name: Build (iOS)
         run: |
