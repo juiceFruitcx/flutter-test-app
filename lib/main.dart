@@ -38,7 +38,16 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   }
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.audio);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'mps3',
+        'wav',
+        'ogg',
+        'flac',
+        'aac',
+        'aiff'
+      ]);
 
     if (result != null) {
       setState(() {
